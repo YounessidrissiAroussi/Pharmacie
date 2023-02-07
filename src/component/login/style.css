@@ -1,0 +1,30 @@
+*{
+    background-color:var(white);
+}
+.login{
+    margin-top: 5000px;
+    width: 600px;
+    margin: 120px auto;
+}
+.login h1 {
+    color: #3445b4;
+    font-size: 50px;
+    margin-bottom: 50px;
+}
+.login h2 {
+    color: #3445b4;
+    font-size: 30px;
+    
+}
+.loginforms{
+    border: 2px solid rgba(193, 196, 247, 0.607);
+    border-radius: 20px;
+    padding: 80px;
+    width: 600px;
+    height: 400px;
+    box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
+}
+input[type="password"],input[type="text"]{
+    border: none;
+    font-size: 20px;
+}

@@ -1,0 +1,37 @@
+.column i{
+    font-size: 100px;
+    padding:  0% 17%;
+}
+.column , .columntwo{
+    border: 2px solid rgb(94, 191, 204);
+    border-radius: 10px;
+    padding: 30px 30px;
+    cursor :pointer ;
+    background-color: rgb(227, 224, 230);
+}
+.column h5{
+    text-align: center;
+    padding-top: 10px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif ;
+    
+}
+.columntwo i{
+    font-size: 100px;
+    
+}
+.columntwo h5{
+    text-align: center;
+    padding-top: 10px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif ;   
+}
+input[type="text"]{
+    padding: 10px;
+    text-align: center;
+    color: navy;
+    font-size: larger;
+    border: none;
+ }
+.date-area{
+    margin: 3% -3%;
+    float: right;
+}

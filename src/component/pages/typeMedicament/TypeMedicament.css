@@ -1,0 +1,26 @@
+#typetable tbody {
+    display: block;
+    overflow: auto;
+    height: 500px;
+    width: 100%;
+  }
+  
+  #typetable thead tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+  
+  #typetable thead, tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+  
+  #typetable thead {
+    width: 100%
+  }
+
+.searchBar{
+	display: flex;
+}

@@ -1,0 +1,34 @@
+.columnOne{
+    background-color: #A7CDF3;
+    text-align: center;
+    height: 200px;
+    width: 300px;
+    padding: 30px;
+    border: none;
+    border-radius: 25px;
+}
+.columnOne img {
+    /* padding-top: -50px ; */
+    width: 100px;
+    height: 100px;
+}
+
+.columnOne h5{
+   color: white;
+   font-size: 20px;
+}
+.btnbtn{
+    border: none;
+    border-radius: 25px;
+    /* background-color: #A7CDF3; */
+}
+.columnOne:hover{
+    background-color: #91c1f0;
+}
+.btnbtn:hover{
+    background-color: #91c1f0;
+}
+
+.showchose{
+    display: flex;
+}

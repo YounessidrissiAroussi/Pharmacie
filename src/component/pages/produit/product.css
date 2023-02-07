@@ -1,0 +1,55 @@
+tbody {
+    display: block;
+    overflow: auto;
+    height: 600px;
+    width: 120%;
+  }
+  
+  thead tr {
+    display: table;
+    width: 120%;
+    table-layout: fixed;
+  }
+  
+  thead, tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+  
+  thead {
+    width: 100%
+  }
+  .Active{
+	width: 10px;
+	padding: 10px;
+	background-color: rgb(243, 71, 71);
+	border: 2px solid white;
+	border-radius: 100%;
+	margin-left: 20px;
+}
+.Active1{
+	margin-left: 20px;
+	width: 10px;
+	padding: 10px;
+	background-color: rgb(63, 228, 66);
+	border: 2px solid white;
+	border-radius: 100%;
+}
+.searchBar , .choose{
+	display: flex;
+}
+
+/* css Details */
+.details-items .items .item .item-title{
+  font-size: 20px;
+  font-weight: bolder;
+  color:black;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--border-color);
+}
+.details-items .items .item .item-title span{
+  font-size: 15px;
+  color: black;
+}
