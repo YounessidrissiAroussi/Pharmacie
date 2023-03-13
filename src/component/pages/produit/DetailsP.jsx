@@ -14,11 +14,11 @@ function DetailsP() {
           {/* { ProductItem.length === 0 ? <div>No data</div>: */}
             <div className='items'>
               <div className="item">
-                <h5 className='item-title'><i className="fa fa-thumbtack"></i> Nom de produit</h5>
+                <h5 className='item-title'><i className=" fa fa-sharp fa-thumbtack"></i> Nom de produit</h5>
                 <span>{ProductItem.nomcommercial}</span>
               </div>
               <div className="item">
-                <h5  className='item-title'><i className="fa  fa-money-bill"></i> Prix public du maroc</h5>
+                <h5  className='item-title'><i className="fa fa-money"></i> Prix public du maroc</h5>
                 <span>{ProductItem.ppm}Dhs</span>
               </div>
               <div className="item">

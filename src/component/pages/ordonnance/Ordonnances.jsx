@@ -68,7 +68,7 @@ function Ordonnances() {
           <td className='chose'>
             <button className='btn btn-danger' onClick={()=>{deleteOrdonnance(item.id)}}><i className="fa fa-solid fa-trash"></i></button>
             <Link to={`/Ordonnance/${item.id}/EditOrdonnance`} className='btn btn-warning'><i className="fa fa-pencil"></i></Link>
-            <Link to={`/Ordonnance/DetailOrdonnance/${item.id}`} className='btn btn-primary'><i className="fa fa-eye"></i></Link>
+            <Link to={`/Ordonnance/DetailOrdonnance/${item.id}`} className='btn btn-primary' state={{data : item}}><i className="fa fa-eye"></i></Link>
           </td>
         </tr>
       ))

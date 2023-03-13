@@ -21,7 +21,7 @@ import DetailOrdonnance from '../pages/ordonnance/DetailOrdonnance'
 import DetailsPatient from '../pages/patient/DetailsPatient';
 function RouterPath(props) {
   return(
-
+    <>
     <BrowserRouter>
     <div className="bodycontant">
         <div className='sidebar'>
@@ -29,28 +29,30 @@ function RouterPath(props) {
         </div>
         <div className='content'>
             <Routes>
-              <Route path='/' element={<Acceuil />} />
-              <Route path='/Produit' element={<Produits />} />
-              <Route path='/Produit/:id/Edit' element={<Edit />} />
-              <Route path='/AjouterProduit' element={<AjouterProduit />} />
-              <Route path='/Patient' element={<Patients />} />
-              <Route path='/AjouterPatient' element={<AjouterPatient />} />
-              <Route path='/Patient/:id/EditPatient' element={<EditPatient />} />
-              <Route path='/Ordonnance' element={<Ordonnances />} />
-              <Route path='/AjouterOrdonnance' element={<AjouterOrdonnance />} />
-              <Route path='/Ordonnance/:id/EditOrdonnance' element={<EditOrdonnance />} />
+              <Route path='/' element={<Acceuil/>} />
+              <Route path='/Produit' element={<Produits/>} />
+              <Route path='/Produit/:id/Edit' element={<Edit/>} />
+              <Route path='/AjouterProduit' element={<AjouterProduit/>} />
+              <Route path='/Patient' element={<Patients/>} />
+              <Route path='/AjouterPatient' element={<AjouterPatient/>} />
+              <Route path='/Patient/:id/EditPatient' element={<EditPatient/>} />
+              <Route path='/Ordonnance' element={<Ordonnances/>} />
+              <Route path='/AjouterOrdonnance' element={<AjouterOrdonnance/>} />
+              <Route path='/Ordonnance/:id/EditOrdonnance' element={<EditOrdonnance/>} />
               <Route path='/Produit/DetailsProduit' element={<DetailsP />} />
               <Route path='/Patient/DetailsPatient' element={<DetailsPatient />} />
               <Route path='/Caisse' element={<Caisse/>} />
               <Route path='/Parametre' element={<Parametre />} />
-              <Route path='/AjouterType' element={<AjouterType />}/>
-              <Route path='/TypeMedicament/:id/EditType' element={<EditType />} />
+              <Route path='/AjouterType' element={<AjouterType/>}/>
               <Route path='/Ordonnance/DetailOrdonnance/:id' element={<DetailOrdonnance />} />
+              <Route path='/TypeMedicament/:id/EditType' element={<EditType/>} />
             </Routes>
           </div>
         </div>
+      
       </BrowserRouter>
    
+    </>
   )
 }
 

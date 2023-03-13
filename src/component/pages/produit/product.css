@@ -1,33 +1,40 @@
-tbody {
+#product>tbody{
     display: block;
     overflow: auto;
     height: 600px;
-    width: 120%;
+    width: 130%;
   }
   
-  thead tr {
-    display: table;
-    width: 120%;
-    table-layout: fixed;
-  }
-  
-  thead, tbody tr {
+  #product>thead tr {
     display: table;
     width: 100%;
     table-layout: fixed;
   }
   
-  thead {
-    width: 100%
+  #product>thead, #product>tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
   }
+  
+  #product>thead {
+    width: 130%;
+  }
+
   .Active{
 	width: 10px;
 	padding: 10px;
+  margin: auto;
 	background-color: rgb(243, 71, 71);
 	border: 2px solid white;
 	border-radius: 100%;
-	margin-left: 20px;
+	margin-left: 50px;
 }
+.qct11{
+  position: relative;
+  left: 35px;
+}
+
 .Active1{
 	margin-left: 20px;
 	width: 10px;
@@ -53,3 +60,5 @@ tbody {
   font-size: 15px;
   color: black;
 }
+
+

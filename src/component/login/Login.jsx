@@ -2,7 +2,6 @@ import React ,{useState , useEffect}from 'react'
 import RouterPath from '../SideNavBar/RouterPath'
 import './style.css'
 import axios from 'axios'
-
 function Login() {
     const [show , setShow] = useState(false)
     const [data ,setData ] = useState([])

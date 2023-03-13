@@ -45,8 +45,6 @@ const SideNavBar = (props) => {
 		},
 	];
 	return(
-		
-	
 		<div
 			className={
 				isExpanded

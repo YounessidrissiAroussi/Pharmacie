@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1
--- Généré le : dim. 29 jan. 2023 à 23:10
--- Version du serveur : 10.4.22-MariaDB
--- Version de PHP : 8.1.2
+-- Hôte : 127.0.0.1:3307
+-- Généré le : dim. 26 fév. 2023 à 18:28
+-- Version du serveur : 10.4.24-MariaDB
+-- Version de PHP : 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,6 +24,50 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `archiveordonnance`
+--
+
+CREATE TABLE `archiveordonnance` (
+  `id` int(11) NOT NULL,
+  `dateO` date DEFAULT NULL,
+  `patient_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `archivepatient`
+--
+
+CREATE TABLE `archivepatient` (
+  `id` int(11) NOT NULL,
+  `nom` varchar(100) DEFAULT NULL,
+  `prenom` varchar(100) DEFAULT NULL,
+  `datenaissance` date DEFAULT NULL,
+  `sexe` char(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `archiveproduit`
+--
+
+CREATE TABLE `archiveproduit` (
+  `id` int(11) NOT NULL,
+  `codebarre` varchar(100) DEFAULT NULL,
+  `nomcommercial` varchar(100) DEFAULT NULL,
+  `ppm` double DEFAULT NULL,
+  `pph` double DEFAULT NULL,
+  `stockinitial` double DEFAULT NULL,
+  `stock` double DEFAULT NULL,
+  `active` tinyint(1) DEFAULT NULL,
+  `typemedicament_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `detailordannance`
 --
 
@@ -34,6 +78,16 @@ CREATE TABLE `detailordannance` (
   `qte` double DEFAULT NULL,
   `prix` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `detailordannance`
+--
+
+INSERT INTO `detailordannance` (`id`, `ordonnance_id`, `produit_id`, `qte`, `prix`) VALUES
+(15, 21, 36, 6, 29),
+(16, 21, 31, 3, 20.97),
+(17, 23, 37, 2, 20),
+(18, 22, 31, 10, 20.97);
 
 --
 -- Déclencheurs `detailordannance`
@@ -89,10 +143,19 @@ CREATE TABLE `ordonnance` (
 --
 
 INSERT INTO `ordonnance` (`id`, `dateO`, `patient_id`) VALUES
-(1, '2023-01-26 23:00:00', 4),
-(15, '2023-01-26 20:19:04', 3),
-(16, '2023-01-27 17:43:42', 4),
-(17, '2023-01-17 23:00:00', NULL);
+(21, '2023-02-24 15:53:46', 6),
+(22, '2023-02-24 15:53:59', 7),
+(23, '2023-02-24 15:54:13', 5);
+
+--
+-- Déclencheurs `ordonnance`
+--
+DELIMITER $$
+CREATE TRIGGER `SoftDelete2` BEFORE DELETE ON `ordonnance` FOR EACH ROW BEGIN
+insert into ArchiveOrdonnance VALUES (old.id,old.dateO,old.patient_id);
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -113,8 +176,19 @@ CREATE TABLE `patient` (
 --
 
 INSERT INTO `patient` (`id`, `nom`, `prenom`, `datenaissance`, `sexe`) VALUES
-(3, 'maktoub', 'chama', '1997-07-18', 'F'),
-(4, 'youness', 'idrisssi', '2001-02-15', 'M');
+(5, 'Passager', 'passager', '0001-01-01', 'F'),
+(6, 'maktoub', 'chama', '1997-07-18', 'F'),
+(7, 'ABIBOU', 'Idriss', '1986-12-05', 'M');
+
+--
+-- Déclencheurs `patient`
+--
+DELIMITER $$
+CREATE TRIGGER `SoftDelete1` BEFORE DELETE ON `patient` FOR EACH ROW BEGIN
+insert into ArchivePatient VALUES (old.id,old.nom,old.prenom,old.datenaissance,old.sexe);
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -139,9 +213,27 @@ CREATE TABLE `produit` (
 --
 
 INSERT INTO `produit` (`id`, `codebarre`, `nomcommercial`, `ppm`, `pph`, `stockinitial`, `stock`, `active`, `typemedicament_id`) VALUES
-(27, '3456789901', 'doliprane', 25, 6, 21, 8, 1, 2),
-(28, '75237523582', 'Doli', 15, 12, 30, 20, 0, 2),
-(29, '5485546544', 'dolipranes ', 20, 20, 20, 202, 1, 1);
+(31, '3456789900', 'RENOMICINE', 20.97, 10.07, 20, -1, 1, 2),
+(36, '4567890545', 'Doliprane', 29, 13, 30, 9, 2, 2),
+(37, NULL, 'Nuravite', 20, 12, 34, 13, 1, 2);
+
+--
+-- Déclencheurs `produit`
+--
+DELIMITER $$
+CREATE TRIGGER `SoftDelete3` BEFORE DELETE ON `produit` FOR EACH ROW BEGIN
+insert into ArchiveOrdonnance VALUES (old. id ,
+   old. codebarre,
+  old.	nomcommercial,
+   old. ppm ,
+  old.  pph,
+   old. stockinitial,
+   old. stock ,
+   old. active,
+   old. typemedicament_id );
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -165,6 +257,26 @@ INSERT INTO `typemedicament` (`id`, `typemedicament`) VALUES
 --
 -- Index pour les tables déchargées
 --
+
+--
+-- Index pour la table `archiveordonnance`
+--
+ALTER TABLE `archiveordonnance`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `patient_id` (`patient_id`);
+
+--
+-- Index pour la table `archivepatient`
+--
+ALTER TABLE `archivepatient`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `archiveproduit`
+--
+ALTER TABLE `archiveproduit`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `typemedicament_id` (`typemedicament_id`);
 
 --
 -- Index pour la table `detailordannance`
@@ -211,10 +323,28 @@ ALTER TABLE `typemedicament`
 --
 
 --
+-- AUTO_INCREMENT pour la table `archiveordonnance`
+--
+ALTER TABLE `archiveordonnance`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `archivepatient`
+--
+ALTER TABLE `archivepatient`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `archiveproduit`
+--
+ALTER TABLE `archiveproduit`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT pour la table `detailordannance`
 --
 ALTER TABLE `detailordannance`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT pour la table `login`
@@ -226,19 +356,19 @@ ALTER TABLE `login`
 -- AUTO_INCREMENT pour la table `ordonnance`
 --
 ALTER TABLE `ordonnance`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT pour la table `patient`
 --
 ALTER TABLE `patient`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT pour la table `produit`
 --
 ALTER TABLE `produit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT pour la table `typemedicament`
@@ -249,6 +379,18 @@ ALTER TABLE `typemedicament`
 --
 -- Contraintes pour les tables déchargées
 --
+
+--
+-- Contraintes pour la table `archiveordonnance`
+--
+ALTER TABLE `archiveordonnance`
+  ADD CONSTRAINT `archiveordonnance_ibfk_1` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`id`);
+
+--
+-- Contraintes pour la table `archiveproduit`
+--
+ALTER TABLE `archiveproduit`
+  ADD CONSTRAINT `archiveproduit_ibfk_1` FOREIGN KEY (`typemedicament_id`) REFERENCES `typemedicament` (`id`);
 
 --
 -- Contraintes pour la table `detailordannance`

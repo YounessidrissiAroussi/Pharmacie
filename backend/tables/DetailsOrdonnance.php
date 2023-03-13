@@ -15,11 +15,16 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 switch($method){
     case "GET":
-           $sql ='SELECT patient.nom, patient.prenom,detailordannance.id ,detailordannance.ordonnance_id,produit.nomcommercial,detailordannance.qte,produit.ppm from patient,produit,ordonnance,detailordannance where patient.id=ordonnance.patient_id and ordonnance.id=detailordannance.ordonnance_id AND  produit.id=detailordannance.produit_id;';
+        // for Display ur databases
+        $path = explode('/' , $_SERVER['REQUEST_URI']);
+        if(isset($path[5]) && is_numeric($path[5])){
+            $sql ='select produit.nomcommercial,produit.ppm,detailordannance.ordonnance_id,detailordannance.qte FROM produit , detailordannance , ordonnance WHERE detailordannance.ordonnance_id = ordonnance.id and produit.id =detailordannance.produit_id AND detailordannance.ordonnance_id=:id;';
             $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':id', $path[5]);
             $stmt->execute();
             $detailordannance = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        // ================ 
+        }
+        //================ 
         echo json_encode($detailordannance);
         break;
     }

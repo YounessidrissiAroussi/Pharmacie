@@ -10,24 +10,6 @@ function DetailsPatient() {
       <h1 className='mt-1'>
         Détail Patient
       </h1>
-      {/* <table className='table table-fixed'> 
-      <thead>
-        <tr>
-          <th>Nom patient</th>
-          <th>Prénom Patient</th>
-          <th>Date de naissance</th>
-          <th>Sexe</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td> {PatientItem.nom} </td>
-          <td> {PatientItem.prenom} </td>
-          <td> {PatientItem.datenaissance} </td>
-          <td> {PatientItem.sexe} </td>
-        </tr>
-      </tbody>
-      </table>   */}
        <div className="user-info">
           <div className="details-items">
             <div className='items'>
