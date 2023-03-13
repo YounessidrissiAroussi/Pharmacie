@@ -1,6 +1,6 @@
 <?php
 class DbConnect {
-    private $server = 'localhost:3307';
+    private $server = 'localhost';
     private $dbname = 'db_pharmacie';
     private $user = 'root';
     private $pass = '';

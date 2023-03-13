@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import './caisse.css'
 import Swal from 'sweetalert2'
+import 'animate.css';
 function Caisse() {
   const [patient, setPatient] = useState([])
   const [produit, setProduit] = useState([])
   const [PatientItem, setPatientItem] = useState()
   const [barcode, setBarCode] = useState([])
-  const [nomProduit, setNomProduit] = useState([])
   const [findProduct, setFindProduct] = useState([])
   const GetPatient = () => {
     axios.get("http://localhost/pharmacie/backend/tables/Caisse/GetPatient.php")
@@ -20,6 +20,7 @@ function Caisse() {
     axios.get("http://localhost/Pharmacie/backend/tables/Produits.php")
       .then(item => {
         setProduit(item.data)
+        console.log(item.data)
       })
   }
 
@@ -31,10 +32,18 @@ function Caisse() {
         FindItem.qte = 1
         FindItem.ordonnance_id = Number(PatientItem)
         const data = [...findProduct, FindItem]
-        // console.log(data[0].id)
         setFindProduct(data)
         setBarCode("")
-        setNomProduit("")
+    }else{
+      Swal.fire({
+        title: 'CodeBarre ou Nom Commercial de Produit Pas correct !!!',
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        }
+      })
     }
   }
 
